@@ -151,6 +151,7 @@ class MAIN:
     def game_over(self):
         self.snake.reset()
 
+    # changes the grass color original = (167, 209, 61)
     def draw_grass(self):
         grass_color = (167, 209, 61)
         for row in range(cell_number):
