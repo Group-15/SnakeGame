@@ -190,12 +190,12 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
 # music for the game
-mixer.music.load('often.wav')
+mixer.music.load('Music/bgmusic.wav')
 mixer.music.play(-1)
 
 # window icon and name
 pygame.display.set_caption("Snake Game")
-icon = pygame.image.load('snakeicon.png')
+icon = pygame.image.load('Graphics/snakeicon.png')
 pygame.display.set_icon(icon)
 
 cell_size = 40
@@ -205,18 +205,15 @@ clock = pygame.time.Clock()
 
 # pics of apple, button and background
 apple = pygame.image.load('Graphics/apple.png').convert_alpha()
-button = pygame.image.load('button.png').convert_alpha()
-background = pygame.image.load('background.png').convert_alpha()
+button = pygame.image.load('Graphics/button.png').convert_alpha()
+background = pygame.image.load('Graphics/background.png').convert_alpha()
 game_font = pygame.font.Font('freesansbold.ttf', 26)
-
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
 
 main_game = MAIN()
-
 muteMath = 0
-
 
 while True:
     for event in pygame.event.get():
@@ -248,11 +245,6 @@ while True:
                     pygame.mixer.music.unpause()
                 elif (muteMath % 2) != 0:
                     pygame.mixer.music.pause()
-
-
-
-
-
 
     screen.fill((175, 215, 70))
     #actual background image
