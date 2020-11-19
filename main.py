@@ -57,7 +57,6 @@ class SNAKE:
                     elif previous_block.x == 1 and next_block.y == 1 or previous_block.y == 1 and next_block.x == 1:
                         screen.blit(self.body_br, block_rect)
 
-
     def update_head_graphics(self):
         head_relation = self.body[1] - self.body[0]
         if head_relation == Vector2(1, 0): self.head = self.head_left
@@ -71,7 +70,6 @@ class SNAKE:
         elif tail_relation == Vector2(-1, 0): self.tail = self.tail_right
         elif tail_relation == Vector2(0, 1): self.tail = self.tail_up
         elif tail_relation == Vector2(0, -1): self.tail = self.tail_down
-
 
     def move_snake(self):
         if self.new_block == True:
@@ -113,20 +111,30 @@ class FRUIT:
         self.pos = Vector2(self.x, self.y)
 
 class BUTTON:
-    def __init__(self):
-        self.x = 10
-        self.y = 700
-        self.pos = Vector2(self.x, self.y)
+    def __init__(self, color, x, y, width, height, text= ''):
+        self.color = color
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.text = text
 
-    def draw_button(self):
-        button_rect = pygame.Rect(self.pos.x, self.pos.y, 40, 40)
-        pygame.draw.rect(screen, (126, 166, 114), button_rect)
+    def draw_button(self, screen):
+        button_rect = pygame.Rect(self.x-2, self.y, self.width, self.height)
+        screen.blit(button, button_rect)
 
+    def isOver(self, pos):
+        if pos[0] > self.x and pos[0] < self.x + self.width:
+            if pos[1] > self.y and pos[1] < self.y + self.height:
+                return True
+        return False
 
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
         self.fruit = FRUIT()
+        # button (x, y, w, h)
+        self.button = BUTTON((0, 0, 0), 20, 720, 60, 60, 'Mute')
 
     def update(self):
         self.snake.move_snake()
@@ -134,12 +142,11 @@ class MAIN:
         self.check_fail()
 
     def draw_elements(self):
-
         #self.draw_grass()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
+        self.button.draw_button(screen)
         self.draw_score()
-
 
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:
@@ -164,22 +171,6 @@ class MAIN:
     def game_over(self):
         self.snake.reset()
 
-    # changes the grass color original = (167, 209, 61)
-    def draw_grass(self):
-        grass_color = (167, 209, 61)
-        for row in range(cell_number):
-            if row % 2 ==0:
-                for col in range(cell_number):
-                    if col % 2 == 0:
-                        grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
-                        pygame.draw.rect(screen, grass_color, grass_rect)
-            else:
-                for col in range(cell_number):
-                    if col % 2 != 0:
-                        grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
-                        pygame.draw.rect(screen, grass_color, grass_rect)
-
-
     def draw_score(self):
         score_text = str(len(self.snake.body) - 3)
         score_surface = game_font.render(score_text, True, (56, 74, 12))
@@ -193,12 +184,6 @@ class MAIN:
         screen.blit(score_surface, score_rect)
         screen.blit(apple, apple_rect)
         pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)
-
-
-
-
-# background
-#background = pygame.image.load('background.png')
 
 # can probably add music here
 pygame.mixer.pre_init(44100, -16, 2, 512)
@@ -217,9 +202,11 @@ cell_size = 40
 cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
 clock = pygame.time.Clock()
-#apple pic
+
+# pics of apple, button and background
 apple = pygame.image.load('Graphics/apple.png').convert_alpha()
-button = BUTTON()
+button = pygame.image.load('button.png').convert_alpha()
+background = pygame.image.load('background.png').convert_alpha()
 game_font = pygame.font.Font('freesansbold.ttf', 26)
 
 
@@ -228,9 +215,13 @@ pygame.time.set_timer(SCREEN_UPDATE, 150)
 
 main_game = MAIN()
 
+muteMath = 0
+
 
 while True:
     for event in pygame.event.get():
+        pos = pygame.mouse.get_pos()
+
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
@@ -250,12 +241,22 @@ while True:
                 if main_game.snake.direction.x != 1:
                     main_game.snake.direction = Vector2(-1, 0)
 
+        if event.type == pygame.MOUSEBUTTONDOWN:
+            if main_game.button.isOver(pos):
+                muteMath += 1
+                if (muteMath % 2) == 0:
+                    pygame.mixer.music.unpause()
+                elif (muteMath % 2) != 0:
+                    pygame.mixer.music.pause()
+
+
+
+
+
+
     screen.fill((175, 215, 70))
-    button.draw_button()
-
-    # actual background image
-    #screen.blit(background, (0, 0))
-
+    #actual background image
+    screen.blit(background, (0, 0))
     main_game.draw_elements()
     pygame.display.update()
     clock.tick(60) #tanees code
