@@ -1,6 +1,6 @@
 import pygame, sys, random
+from pygame import mixer
 from pygame.math import Vector2
-
 
 class SNAKE:
     def __init__(self):
@@ -66,7 +66,7 @@ class SNAKE:
         elif head_relation == Vector2(0, -1): self.head = self.head_down
 
     def update_tail_graphics(self):
-        tail_relation = self.body[1] - self.body[0]
+        tail_relation = self.body[-2] - self.body[-1]
         if tail_relation == Vector2(1, 0):  self.tail = self.tail_left
         elif tail_relation == Vector2(-1, 0): self.tail = self.tail_right
         elif tail_relation == Vector2(0, 1): self.tail = self.tail_up
@@ -112,6 +112,17 @@ class FRUIT:
         self.y = random.randint(0, cell_number - 1)
         self.pos = Vector2(self.x, self.y)
 
+class BUTTON:
+    def __init__(self):
+        self.x = 10
+        self.y = 700
+        self.pos = Vector2(self.x, self.y)
+
+    def draw_button(self):
+        button_rect = pygame.Rect(self.pos.x, self.pos.y, 40, 40)
+        pygame.draw.rect(screen, (126, 166, 114), button_rect)
+
+
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
@@ -123,10 +134,12 @@ class MAIN:
         self.check_fail()
 
     def draw_elements(self):
-        self.draw_grass()
+
+        #self.draw_grass()
         self.fruit.draw_fruit()
         self.snake.draw_snake()
         self.draw_score()
+
 
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:
@@ -166,6 +179,7 @@ class MAIN:
                         grass_rect = pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size)
                         pygame.draw.rect(screen, grass_color, grass_rect)
 
+
     def draw_score(self):
         score_text = str(len(self.snake.body) - 3)
         score_surface = game_font.render(score_text, True, (56, 74, 12))
@@ -180,14 +194,32 @@ class MAIN:
         screen.blit(apple, apple_rect)
         pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)
 
+
+
+
+# background
+#background = pygame.image.load('background.png')
+
 # can probably add music here
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
+
+# music for the game
+mixer.music.load('often.wav')
+mixer.music.play(-1)
+
+# window icon and name
+pygame.display.set_caption("Snake Game")
+icon = pygame.image.load('snakeicon.png')
+pygame.display.set_icon(icon)
+
 cell_size = 40
 cell_number = 20
 screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
 clock = pygame.time.Clock()
+#apple pic
 apple = pygame.image.load('Graphics/apple.png').convert_alpha()
+button = BUTTON()
 game_font = pygame.font.Font('freesansbold.ttf', 26)
 
 
@@ -195,6 +227,7 @@ SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
 
 main_game = MAIN()
+
 
 while True:
     for event in pygame.event.get():
@@ -218,6 +251,11 @@ while True:
                     main_game.snake.direction = Vector2(-1, 0)
 
     screen.fill((175, 215, 70))
+    button.draw_button()
+
+    # actual background image
+    #screen.blit(background, (0, 0))
+
     main_game.draw_elements()
     pygame.display.update()
-    clock.tick(60)
+    clock.tick(60) #tanees code
