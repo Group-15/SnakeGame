@@ -192,6 +192,7 @@ pygame.init()
 # music for the game
 mixer.music.load('Music/bgmusic2.wav')
 mixer.music.play(-1)
+mixer.music.set_volume(.20)
 
 # window icon and name
 pygame.display.set_caption("Snake Game")
