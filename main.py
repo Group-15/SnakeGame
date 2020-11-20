@@ -190,7 +190,7 @@ pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
 # music for the game
-mixer.music.load('Music/bgmusic.wav')
+mixer.music.load('Music/bgmusic2.wav')
 mixer.music.play(-1)
 
 # window icon and name
@@ -237,7 +237,6 @@ while True:
             if event.key == pygame.K_LEFT:
                 if main_game.snake.direction.x != 1:
                     main_game.snake.direction = Vector2(-1, 0)
-
         if event.type == pygame.MOUSEBUTTONDOWN:
             if main_game.button.isOver(pos):
                 muteMath += 1
