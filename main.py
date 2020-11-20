@@ -185,7 +185,7 @@ class MAIN:
         screen.blit(apple, apple_rect)
         pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)
 
-# can probably add music here
+
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
