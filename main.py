@@ -134,7 +134,7 @@ class MAIN:
         self.snake = SNAKE()
         self.fruit = FRUIT()
         # button (x, y, w, h)
-        self.button = BUTTON((0, 0, 0), 20, 720, 60, 60, 'Mute')
+        self.button = BUTTON((0, 0, 0), 20, 740, 46, 46, 'Mute')
 
     def update(self):
         self.snake.move_snake()
