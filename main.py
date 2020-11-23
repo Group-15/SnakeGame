@@ -135,11 +135,13 @@ class MAIN:
         self.fruit = FRUIT()
         # button (x, y, w, h)
         self.button = BUTTON((0, 0, 0), 20, 740, 46, 46, 'Mute')
+        #self.high_score()
 
     def update(self):
         self.snake.move_snake()
         self.check_collision()
         self.check_fail()
+        #self.high_score()
 
     def draw_elements(self):
         #self.draw_grass()
@@ -147,16 +149,19 @@ class MAIN:
         self.snake.draw_snake()
         self.button.draw_button(screen)
         self.draw_score()
+        #self.high_score()
 
     def check_collision(self):
         if self.fruit.pos == self.snake.body[0]:
             self.fruit.randomize()
             self.snake.add_block()
             self.snake.play_crunch_sound()
+            #self.high_score()
 
         for block in self.snake.body[1:]:
             if block == self.fruit.pos:
                 self.fruit.randomize()
+
             # reposition the fruit and adds another block to snake
 
     def check_fail(self):
@@ -184,15 +189,30 @@ class MAIN:
         screen.blit(score_surface, score_rect)
         screen.blit(apple, apple_rect)
         pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)
+    """
+    def high_score(self):
+        score_text = str(0)
+        score_up = score_text + str(1)
+        #score_text = str(len(self.snake.body) - 3)
+        score_surface = game_font.render(score_up, True, (56, 74, 12))
+        score_x = int(400)
+        score_y = int(100)
+        score_rect = score_surface.get_rect(center=(score_x, score_y))
 
+        bg_rect = pygame.Rect(400, 100, 60, 30)
+
+        pygame.draw.rect(screen, (167, 209, 61), bg_rect)
+        screen.blit(score_surface, score_rect)
+        pygame.draw.rect(screen, (56, 74, 12), bg_rect, 2)
+    """
 
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
 # music for the game
-mixer.music.load('Music/bgmusic2.wav')
+mixer.music.load('Music/wap.wav')
 mixer.music.play(-1)
-mixer.music.set_volume(.20)
+mixer.music.set_volume(.10)
 
 # window icon and name
 pygame.display.set_caption("Snake Game")
