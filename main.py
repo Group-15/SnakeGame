@@ -2,12 +2,21 @@ import pygame, sys, random
 from pygame import mixer
 from pygame.math import Vector2
 
-#Angels code
+#Angels code:
+# -def __init__(self): initiates the snake class and creates variables to different parts of the snake along with loading the images to those variables
+# -def draw_snake(self): main logic and loop of the snake
+# -def update_head_graphics(self): is a function that updates the head of the snake
+# -def update_head_graphics(self): updates the tail of the snake
+# -def move_snake(self): is the logic to move the snake
+# -def add_block(self): adds another piece to the snake if its true
+# -def play_crunch_sound(self): plays the crunch sound when the snake eats the apple
+# -def reset(self): is the function that hold the reset values of the snake
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(0, 0)
         self.new_block = False
+        self.snake_speed = 150
 
         self.head_up = pygame.image.load('Graphics/head_up.png').convert_alpha()
         self.head_down = pygame.image.load('Graphics/head_down.png').convert_alpha()
@@ -247,7 +256,9 @@ background = pygame.image.load('Graphics/background.png').convert_alpha() # Faiz
 game_font = pygame.font.Font('freesansbold.ttf', 26) # Faizah code: loads the font of the score
 
 SCREEN_UPDATE = pygame.USEREVENT
-pygame.time.set_timer(SCREEN_UPDATE, 150)
+
+game_speed = 150
+pygame.time.set_timer(SCREEN_UPDATE, game_speed)
 
 main_game = MAIN()
 muteMath = 0
