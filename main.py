@@ -2,6 +2,7 @@ import pygame, sys, random
 from pygame import mixer
 from pygame.math import Vector2
 
+#Angel code
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
@@ -93,6 +94,7 @@ class SNAKE:
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(0, 0)
 
+#Tanees code
 class FRUIT:
     def __init__(self):
        self.randomize()
@@ -110,6 +112,7 @@ class FRUIT:
         self.y = random.randint(0, cell_number - 1)
         self.pos = Vector2(self.x, self.y)
 
+#Davids code
 class BUTTON:
     def __init__(self, color, x, y, width, height, text= ''):
         self.color = color
@@ -129,6 +132,7 @@ class BUTTON:
                 return True
         return False
 
+# Ismail
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
@@ -209,12 +213,12 @@ class MAIN:
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
-# music for the game
+# music for the game - Faizah
 mixer.music.load('Music/wap.wav')
 mixer.music.play(-1)
 mixer.music.set_volume(.10)
 
-# window icon and name
+# window icon and name - Faizah
 pygame.display.set_caption("Snake Game")
 icon = pygame.image.load('Graphics/snakeicon.png')
 pygame.display.set_icon(icon)
@@ -225,7 +229,7 @@ screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_si
 clock = pygame.time.Clock()
 
 # pics of apple, button and background
-apple = pygame.image.load('Graphics/apple.png').convert_alpha()
+apple = pygame.image.load('Graphics/apple.png').convert_alpha() #Tanees
 button = pygame.image.load('Graphics/button.png').convert_alpha()
 background = pygame.image.load('Graphics/background.png').convert_alpha()
 game_font = pygame.font.Font('freesansbold.ttf', 26)
@@ -236,6 +240,7 @@ pygame.time.set_timer(SCREEN_UPDATE, 150)
 main_game = MAIN()
 muteMath = 0
 
+# Evelyn Code
 while True:
     for event in pygame.event.get():
         pos = pygame.mouse.get_pos()
