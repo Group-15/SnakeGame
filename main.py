@@ -94,17 +94,17 @@ class SNAKE:
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
         self.direction = Vector2(0, 0)
 
-#Tanees code
+#Tanees code:
+# -def __init__(self): Initiates the fruit class
+# -def draw_fruit(self): is a function that creates a Rectangle from the pygame library that takes (x coordinates, y coordinates, width, height)
+# -def randomize(self): is a function to randomize the x and y coordinates of the apple
 class FRUIT:
     def __init__(self):
        self.randomize()
-        # create an x and y position
-        # draws a square
 
     def draw_fruit(self):
         fruit_rect = pygame.Rect(int(self.pos.x * cell_size), int(self.pos.y * cell_size), cell_size, cell_size)
         screen.blit(apple, fruit_rect)
-        #pygame.draw.rect(screen, (126, 166, 114), fruit_rect)
         # create a rectangle and draw a rectangle
 
     def randomize(self):
@@ -112,7 +112,8 @@ class FRUIT:
         self.y = random.randint(0, cell_number - 1)
         self.pos = Vector2(self.x, self.y)
 
-#Davids code
+#Davids code:
+# -def def __init__(self, color, x, y, width, height, text= ''):
 class BUTTON:
     def __init__(self, color, x, y, width, height, text= ''):
         self.color = color
@@ -213,26 +214,26 @@ class MAIN:
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
-# music for the game - Faizah code
-mixer.music.load('Music/wap.wav')
+# music for the game - Faizah code : uses pygame to load in the music, and set the volume
+mixer.music.load('Music/bgmusic2.wav')
 mixer.music.play(-1)
 mixer.music.set_volume(.10)
 
 # window icon and name - Faizah code
-pygame.display.set_caption("Snake Game")
-icon = pygame.image.load('Graphics/snakeicon.png')
-pygame.display.set_icon(icon)
+pygame.display.set_caption("Snake Game") # sets the name of the window to snake game
+icon = pygame.image.load('Graphics/snakeicon.png') # loads the icon of the window
+pygame.display.set_icon(icon) # sets the icon of the snake to the window
 
 cell_size = 40
 cell_number = 20
-screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size))
+screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size)) # sets the main window size of the game to (800 x 800)
 clock = pygame.time.Clock()
 
 # pics of apple, button and background
-apple = pygame.image.load('Graphics/apple.png').convert_alpha() # Tanees code
-button = pygame.image.load('Graphics/button.png').convert_alpha() # Davids code
-background = pygame.image.load('Graphics/background.png').convert_alpha() # Faizah code
-game_font = pygame.font.Font('freesansbold.ttf', 26) # Faizah code
+apple = pygame.image.load('Graphics/apple.png').convert_alpha() # Tanees code: loads the image of the apple
+button = pygame.image.load('Graphics/button.png').convert_alpha() # Davids code: loads the image of the music button
+background = pygame.image.load('Graphics/background.png').convert_alpha() # Faizah code: loads the image of the background
+game_font = pygame.font.Font('freesansbold.ttf', 26) # Faizah code: loads the font of the score
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
@@ -240,7 +241,9 @@ pygame.time.set_timer(SCREEN_UPDATE, 150)
 main_game = MAIN()
 muteMath = 0
 
-# Evelyn Code
+# Evelyn's Code:
+# While loop that listens for the users key inputs: up arrow key, down arrow key,
+# left arrow key, right arrow key, to move the snake in all directions
 while True:
     for event in pygame.event.get():
         pos = pygame.mouse.get_pos()
@@ -276,4 +279,4 @@ while True:
     screen.blit(background, (0, 0))
     main_game.draw_elements()
     pygame.display.update()
-    clock.tick(60) #tanees code
+    clock.tick(60) # sets the frames per second of the game to 60
