@@ -2,7 +2,7 @@ import pygame, sys, random
 from pygame import mixer
 from pygame.math import Vector2
 
-#Angel code
+#Angels code
 class SNAKE:
     def __init__(self):
         self.body = [Vector2(5, 10), Vector2(4, 10), Vector2(3, 10)]
@@ -132,7 +132,7 @@ class BUTTON:
                 return True
         return False
 
-# Ismail
+# Ismail code
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
@@ -213,12 +213,12 @@ class MAIN:
 pygame.mixer.pre_init(44100, -16, 2, 512)
 pygame.init()
 
-# music for the game - Faizah
+# music for the game - Faizah code
 mixer.music.load('Music/wap.wav')
 mixer.music.play(-1)
 mixer.music.set_volume(.10)
 
-# window icon and name - Faizah
+# window icon and name - Faizah code
 pygame.display.set_caption("Snake Game")
 icon = pygame.image.load('Graphics/snakeicon.png')
 pygame.display.set_icon(icon)
