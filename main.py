@@ -229,10 +229,10 @@ screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_si
 clock = pygame.time.Clock()
 
 # pics of apple, button and background
-apple = pygame.image.load('Graphics/apple.png').convert_alpha() #Tanees
-button = pygame.image.load('Graphics/button.png').convert_alpha()
-background = pygame.image.load('Graphics/background.png').convert_alpha()
-game_font = pygame.font.Font('freesansbold.ttf', 26)
+apple = pygame.image.load('Graphics/apple.png').convert_alpha() # Tanees code
+button = pygame.image.load('Graphics/button.png').convert_alpha() # Davids code
+background = pygame.image.load('Graphics/background.png').convert_alpha() # Faizah code
+game_font = pygame.font.Font('freesansbold.ttf', 26) # Faizah code
 
 SCREEN_UPDATE = pygame.USEREVENT
 pygame.time.set_timer(SCREEN_UPDATE, 150)
