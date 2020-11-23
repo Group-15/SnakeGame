@@ -113,7 +113,9 @@ class FRUIT:
         self.pos = Vector2(self.x, self.y)
 
 #Davids code:
-# -def def __init__(self, color, x, y, width, height, text= ''):
+# -def def __init__(self, color, x, y, width, height, text= ''): initiates the BUTTON class and gives its parameters
+# -def draw_button(self, screen): draws a rectangle with pygame that takes (x-coordinates, y coordinates, width, height)
+# -def isOver(self,pos): is a function that has a if statement that will check if the mouse is over the mute button or not
 class BUTTON:
     def __init__(self, color, x, y, width, height, text= ''):
         self.color = color
@@ -133,7 +135,16 @@ class BUTTON:
                 return True
         return False
 
-# Ismail code
+# Ismail code:
+# -def __init__(self): initiates all of the classes
+# -def update(self): function that updates the snake moving, checks collision of the apple and snake and checks whether the snake has hit the outer screen
+# -def draw_elements(self): draws the main assets to the screen
+# -def check_collision(self): checks if the fruit is in the same position as the snakes head
+# then it randomizes the fruit, adds a block to the snake and plays the crunch sound
+# -def check_fail(self): checks whether the snake has left the main screen size, and if it has it goes to the game over function
+# -def game_over(self): resets the snake to its initial position
+# -def draw_score(self): calculates the score by taking the snakes initial length of 3 and subtracts  it by 3
+# creates the scores position and size, along with creating the rectangle around the score
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
@@ -226,7 +237,7 @@ pygame.display.set_icon(icon) # sets the icon of the snake to the window
 
 cell_size = 40
 cell_number = 20
-screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size)) # sets the main window size of the game to (800 x 800)
+screen = pygame.display.set_mode((cell_number * cell_size, cell_number * cell_size)) # sets the main window size of the game to (800 x 800) by multiplying cell_size by cell number
 clock = pygame.time.Clock()
 
 # pics of apple, button and background
@@ -244,6 +255,8 @@ muteMath = 0
 # Evelyn's Code:
 # While loop that listens for the users key inputs: up arrow key, down arrow key,
 # left arrow key, right arrow key, to move the snake in all directions
+# also listens whether the mouse is over the mute button or not.
+# It's the main loop of the game that updates everything along with checking if the user quit the game
 while True:
     for event in pygame.event.get():
         pos = pygame.mouse.get_pos()
@@ -278,5 +291,5 @@ while True:
     #actual background image
     screen.blit(background, (0, 0))
     main_game.draw_elements()
-    pygame.display.update()
+    pygame.display.update()# updates the game
     clock.tick(60) # sets the frames per second of the game to 60
