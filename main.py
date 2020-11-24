@@ -152,8 +152,8 @@ class BUTTON:
 # then it randomizes the fruit, adds a block to the snake and plays the crunch sound
 # -def check_fail(self): checks whether the snake has left the main screen size, and if it has it goes to the game over function
 # -def game_over(self): resets the snake to its initial position
-# -def draw_score(self): calculates the score by taking the snakes initial length of 3 and subtracts  it by 3
-# creates the scores position and size, along with creating the rectangle around the score
+# -def draw_score(self): calculates the score by taking the snakes initial length of 3 and subtracting it by 3 and
+#  creates the scores position and size, along with creating the rectangle around the score
 class MAIN:
     def __init__(self):
         self.snake = SNAKE()
